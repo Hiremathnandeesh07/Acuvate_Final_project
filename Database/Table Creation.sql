@@ -46,11 +46,11 @@ END
 
 
 
-select * from Shipments
 
 ALTER TABLE Shipments
-ADD CONSTRAINT DF_Shipments_Status
-DEFAULT 'Booked' FOR Status
+ADD IsDeleted BIT NOT NULL DEFAULT 0;
+
+
 
 
 

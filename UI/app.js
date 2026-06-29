@@ -235,15 +235,24 @@ function updateAutoAwb() {
   awbInput.value = generateAwbFromOrigin(origin);
 }
 
+function getNextShipmentId() {
+  const numericIds = shipments
+    .map((shipment) => Number(shipment.shipmentId))
+    .filter((id) => Number.isInteger(id) && id > 0);
+
+  return numericIds.length > 0 ? Math.max(...numericIds) + 1 : 1;
+}
+
 function generateAwbFromOrigin(origin) {
   const cleanedOrigin = String(origin)
     .trim()
     .replace(/[^A-Za-z]/g, "")
     .toUpperCase();
-  const prefix = cleanedOrigin.slice(0, 3);
+  const prefix = cleanedOrigin.slice(0, 3) || "DEL";
   const year = new Date().getFullYear();
-  const shipmentCount = shipments.length + 1;
-  return `${prefix}${year}00${shipmentCount}`;
+
+  const nextId = getNextShipmentId();
+  return `${prefix}${year}00${nextId}`;
 }
 
 function getStatusBadge(status) {
@@ -356,11 +365,14 @@ async function deleteShipment(id) {
     await requestJson(`${BASE_URL}/${id}`, {
       method: "DELETE",
     });
+
     shipments = shipments.filter(
       (shipment) => String(shipment.shipmentId) !== String(id),
     );
     displayShipments(shipments);
-    loadStats();
+    await loadStats();
+    refreshBookingForm();
+
     showNotification("Shipment deleted.");
   } catch (error) {
     console.error(error);
@@ -369,6 +381,15 @@ async function deleteShipment(id) {
       false,
     );
   }
+}
+
+function refreshBookingForm() {
+  const form = document.getElementById("bookShipmentForm");
+  if (form) {
+    form.reset();
+  }
+
+  updateAutoAwb();
 }
 
 async function updateShipmentStatus(awb, status) {

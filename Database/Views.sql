@@ -14,4 +14,6 @@ SELECT
     Status,
     BookedAt,
     DeliveredAt
-FROM Shipments;
+FROM Shipments
+
+select * from shipments

@@ -10,6 +10,7 @@ AS
 BEGIN
     SELECT *
     FROM vw_ShipmentDashboard
+    
     ORDER BY BookedAt DESC;
 END;
 GO
@@ -24,7 +25,7 @@ AS
 BEGIN
     SELECT *
     FROM Shipments
-    WHERE AWBNumber = @AWBNumber;
+    WHERE AWBNumber = @AWBNumber
 END;
 GO
 
@@ -49,7 +50,7 @@ BEGIN
                     THEN GETDATE()
                     ELSE DeliveredAt
                 END
-        WHERE AWBNumber = @AWBNumber;
+        WHERE AWBNumber = @AWBNumber
 
     END TRY
 
@@ -120,8 +121,11 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        DELETE FROM Shipments
-        WHERE ShipmentId = @ShipmentId;
+        
+        UPDATE Shipments
+        SET IsDeleted = 1
+        WHERE ShipmentId = @ShipmentId
+
 
         COMMIT TRANSACTION;
     END TRY

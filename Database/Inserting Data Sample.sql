@@ -1,6 +1,7 @@
 USE DelhiveryDB;
 GO
 
+truncate table shipments
 
 INSERT INTO Shipments
 (AWBNumber, SenderName, ReceiverName, Origin, Destination, WeightKg, Status, BookedAt, DeliveredAt)
@@ -31,34 +32,5 @@ VALUES
 
 
 
---  insertion
-IF NOT EXISTS
-(
-    SELECT *
-    FROM Shipments
-    WHERE AWBNumber = 'AWB1001'
-)
-BEGIN
-    INSERT INTO Shipments
-    (
-        AWBNumber,
-        SenderName,
-        ReceiverName,
-        Origin,
-        Destination,
-        WeightKg,
-        Status,
-        DeliveredAt
-    )
-    VALUES
-    (
-        'AWB1001',
-        'Nandeesh',
-        'Rahul',
-        'Belagavi',
-        'Bengaluru',
-        2.50,
-        'Booked',
-        NULL
-    );
-END
+select * from shipments
+
