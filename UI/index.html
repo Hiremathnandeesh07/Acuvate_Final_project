@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipment Intelligence Platform</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+
+    <header>
+      <h2>Delhivery</h2>
+
+      <h1>Shipment Intelligence Platform</h1>
+    </header>
+
+    <!-- Notification -->
+
+    <div id="notification"></div>
+
+    <!-- Loading -->
+
+    <div id="loading">Loading...</div>
+
+    <!-- Stats -->
+
+    <section>
+      <h2>Shipment Statistics</h2>
+
+      <div id="statsBar">
+        <div class="statCard">
+          <h3>Booked</h3>
+          <p id="bookedCount">0</p>
+        </div>
+
+        <div class="statCard">
+          <h3>In Transit</h3>
+          <p id="inTransitCount">0</p>
+        </div>
+
+        <div class="statCard">
+          <h3>Out For Delivery</h3>
+          <p id="outForDeliveryCount">0</p>
+        </div>
+
+        <div class="statCard">
+          <h3>Delivered</h3>
+          <p id="deliveredCount">0</p>
+        </div>
+
+        <div class="statCard">
+          <h3>RTO</h3>
+          <p id="rtoCount">0</p>
+        </div>
+
+        <div class="statCard">
+          <h3>Total Shipments</h3>
+          <p id="totalCount">0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Book Shipment -->
+
+    <section>
+      <h2>Book Shipment</h2>
+
+      <form id="bookShipmentForm">
+        <input
+          type="text"
+          id="awbNumber"
+          placeholder="Auto-generated AWB"
+          readonly
+        />
+
+        <input type="text" id="senderName" placeholder="Sender Name" />
+
+        <input type="text" id="receiverName" placeholder="Receiver Name" />
+
+        <input type="text" id="origin" placeholder="Origin" />
+
+        <input type="text" id="destination" placeholder="Destination" />
+
+        <input type="number" id="weightKg" placeholder="Weight (Kg)" />
+
+        <button type="submit">Book Shipment</button>
+      </form>
+    </section>
+
+    <!-- Track Shipment -->
+
+    <section>
+      <h2>Track Shipment</h2>
+
+      <input type="text" id="searchAwb" placeholder="Enter AWB Number" />
+
+      <button id="searchButton">Search</button>
+
+      <div id="shipmentCard"></div>
+    </section>
+
+    <!-- Filter -->
+
+    <section>
+      <h2>Shipments</h2>
+
+      <label> Filter : </label>
+
+      <select id="statusFilter">
+        <option value="All">All</option>
+
+        <option value="Booked">Booked</option>
+
+        <option value="In Transit">In Transit</option>
+
+        <option value="Out for Delivery">Out for Delivery</option>
+
+        <option value="Delivered">Delivered</option>
+
+        <option value="RTO">RTO</option>
+      </select>
+    </section>
+
+    <!-- Shipments Table -->
+
+    <table id="shipmentTable">
+      <thead>
+        <tr>
+          <th>AWB</th>
+
+          <th>Sender</th>
+
+          <th>Receiver</th>
+
+          <th>Route</th>
+
+          <th>Weight</th>
+
+          <th>Status</th>
+
+          <th>Update Status</th>
+
+          <th>Delete</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+    </table>
+
+    <script src="app.js"></script>
+  </body>
+</html>

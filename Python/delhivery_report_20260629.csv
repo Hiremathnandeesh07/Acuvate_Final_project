@@ -1,0 +1,7 @@
+ShipmentId,AWBNumber,SenderName,ReceiverName,Origin,Destination,WeightKg,Status,BookedAt,DeliveredAt
+3,AWB1003,Sneha,Priya,Delhi,Jaipur,1.8,Out for Delivery,2026-06-26T16:03:48.61,2026-06-26T16:03:48.61
+5,AWB1005,Vikram,Suresh,Mysuru,Hubballi,4.75,RTO,2026-06-26T16:03:48.61,
+7,AWB1007,Deepak,Ramesh,Kolkata,Patna,6.3,In Transit,2026-06-26T16:03:48.61,
+8,AWB1008,Meera,Divya,Ahmedabad,Surat,1.25,Delivered,2026-06-26T16:03:48.61,2026-06-26T16:03:48.61
+9,AWB1009,Karthik,Varun,Goa,Mangalore,7.6,Out for Delivery,2026-06-26T16:03:48.61,
+10,AWB1010,Pooja,Nikhil,Lucknow,Kanpur,3.0,Booked,2026-06-26T16:03:48.61,
