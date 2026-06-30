@@ -11,6 +11,7 @@ SELECT
     ReceiverName,
     Origin,
     Destination,
+    WeightKg,
     Status,
     BookedAt,
     DeliveredAt

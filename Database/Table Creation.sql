@@ -12,6 +12,7 @@ GO
 USE DelhiveryDB;
 GO
 
+
 IF OBJECT_ID('Shipments', 'U') IS NULL
 BEGIN
 CREATE TABLE Shipments
@@ -31,7 +32,7 @@ CREATE TABLE Shipments
     WeightKg DECIMAL(10,2) NOT NULL
         CHECK (WeightKg > 0),
 
-    Status VARCHAR(30) NOT NULL
+    Status VARCHAR(30) DEFAULT 'Booked'
         CHECK (Status IN ('Booked',
                           'In Transit',
                           'Out for Delivery',
@@ -47,8 +48,6 @@ END
 
 
 
-ALTER TABLE Shipments
-ADD IsDeleted BIT NOT NULL DEFAULT 0;
 
 
 
