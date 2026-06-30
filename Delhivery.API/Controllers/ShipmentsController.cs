@@ -3,6 +3,7 @@ using Delhivery.Data.Exceptions;
 using Delhivery.Data.Models;
 using Delhivery.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Delhivery.API.Controllers
 {
@@ -48,17 +49,49 @@ namespace Delhivery.API.Controllers
             if (string.IsNullOrWhiteSpace(request.AWBNumber) || request.AWBNumber.Trim().ToLower()=="string")
                 return BadRequest("AWB Number is required.");
 
-            if (string.IsNullOrWhiteSpace(request.SenderName) || request.SenderName.Trim().ToLower() == "string")
+            if (string.IsNullOrWhiteSpace(request.SenderName) ||
+    request.SenderName.Trim().ToLower() == "string")
+            {
                 return BadRequest("Sender Name is required.");
+            }
 
-            if (string.IsNullOrWhiteSpace(request.ReceiverName) || request.ReceiverName.Trim().ToLower() == "string")
+            if (!Regex.IsMatch(request.SenderName, @"^[A-Za-z ]+$"))
+            {
+                return BadRequest("Sender Name should contain only letters.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.ReceiverName) ||
+    request.ReceiverName.Trim().ToLower() == "string")
+            {
                 return BadRequest("Receiver Name is required.");
+            }
 
-            if (string.IsNullOrWhiteSpace(request.Origin) || request.Origin.Trim().ToLower() == "string")
-                return BadRequest("Please enter the Origin.");
+            if (!Regex.IsMatch(request.ReceiverName, @"^[A-Za-z ]+$"))
+            {
+                return BadRequest("Receiver Name should contain only letters.");
+            }
 
-            if (string.IsNullOrWhiteSpace(request.Destination) || request.Destination.Trim().ToLower() == "string")
-                return BadRequest("Please enter the Destination.");
+            if (string.IsNullOrWhiteSpace(request.Origin) ||
+    request.Origin.Trim().ToLower() == "string")
+            {
+                return BadRequest("Origin is required.");
+            }
+
+            if (!Regex.IsMatch(request.Origin, @"^[A-Za-z ]+$"))
+            {
+                return BadRequest("Origin should contain only letters.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Destination) ||
+      request.Destination.Trim().ToLower() == "string")
+            {
+                return BadRequest("Destination is required.");
+            }
+
+            if (!Regex.IsMatch(request.Destination, @"^[A-Za-z ]+$"))
+            {
+                return BadRequest("Destination should contain only letters.");
+            }
 
             if (request.WeightKg <= 0)
                 return BadRequest("Weight must be greater than zero.");

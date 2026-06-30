@@ -1,0 +1,16 @@
+ShipmentId,AWBNumber,SenderName,ReceiverName,Origin,Destination,WeightKg,Status,BookedAt,DeliveredAt
+2,CHE2026002,Sita,Ravi,Chennai,Mumbai,5.2,In Transit,2026-06-29T17:02:40.493,
+4,KOL2026004,Anu,Priya,Kolkata,Hyderabad,4.7,Delivered,2026-06-29T17:02:40.493,2026-06-29T17:02:40.493
+6,MUM2026006,Arjun,Rahul,Mumbai,Chennai,1.5,In Transit,2026-06-29T17:02:40.493,
+8,DEL2026008,David,Chris,Delhi,Hyderabad,7.8,Out for Delivery,2026-06-29T17:02:40.493,
+9,CHE2026009,Neha,Ramesh,Chennai,Pune,3.6,Delivered,2026-06-29T17:02:40.493,2026-06-29T17:02:40.493
+10,HYD2026010,Asha,Vikram,Hyderabad,Delhi,2.9,RTO,2026-06-29T17:02:40.493,
+11,MUM2026011,Manoj,Sunil,Mumbai,Bangalore,4.1,Out for Delivery,2026-06-29T17:02:40.493,2026-06-29T17:35:13.667
+12,KOL2026012,Kavya,Divya,Kolkata,Chennai,5.0,In Transit,2026-06-29T17:02:40.493,
+13,DEL2026013,Rohit,Virat,Delhi,Mumbai,6.3,Out for Delivery,2026-06-29T17:02:40.493,
+14,PUN2026014,Pooja,Nisha,Pune,Kolkata,3.2,Delivered,2026-06-29T17:02:40.493,2026-06-29T17:02:40.493
+15,CHE2026015,Amit,Raj,Chennai,Hyderabad,2.0,RTO,2026-06-29T17:02:40.493,
+16,BAN2026016,Deepa,Suresh,Bangalore,Delhi,1.8,Booked,2026-06-29T17:02:40.493,
+17,HYD2026017,Rahul,Kiran,Hyderabad,Mumbai,4.5,In Transit,2026-06-29T17:02:40.493,
+18,DEL2026018,Meena,Lakshman,Delhi,Chennai,3.9,Out for Delivery,2026-06-29T17:02:40.493,
+20,KOL2026020,Geeta,Rekha,Kolkata,Pune,5.6,RTO,2026-06-29T17:02:40.493,

@@ -193,6 +193,8 @@ function displayShipments(data) {
       <td>${shipment.weightKg || ""}</td>
       <td>${getStatusBadge(shipment.status)}</td>
       <td>
+
+      
         <select class="updateStatus" data-awb="${shipment.awbNumber || ""}">
           <option value="Booked" ${shipment.status === "Booked" ? "selected" : ""}>Booked</option>
           <option value="In Transit" ${shipment.status === "In Transit" ? "selected" : ""}>In Transit</option>
@@ -272,6 +274,10 @@ function getStatusBadge(status) {
   }
 }
 
+function isValidTextValue(value) {
+  return typeof value === "string" && /^[A-Za-z\s'.-]+$/.test(value.trim());
+}
+
 async function loadStats() {
   try {
     const stats = await requestJson(`${BASE_URL}/stats`);
@@ -303,6 +309,32 @@ async function handleBookShipment(event) {
 
   if (!awbNumber || !senderName || !receiverName || !origin || !destination) {
     showNotification("Please fill in all shipment fields.", false);
+    return;
+  }
+
+  if (!isValidTextValue(senderName)) {
+    showNotification(
+      "Sender name must contain only letters and spaces.",
+      false,
+    );
+    return;
+  }
+
+  if (!isValidTextValue(receiverName)) {
+    showNotification(
+      "Receiver name must contain only letters and spaces.",
+      false,
+    );
+    return;
+  }
+
+  if (!isValidTextValue(origin)) {
+    showNotification("Origin must be a text value.", false);
+    return;
+  }
+
+  if (!isValidTextValue(destination)) {
+    showNotification("Destination must be a text value.", false);
     return;
   }
 

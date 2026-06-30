@@ -13,7 +13,7 @@ def get_shipments():
 
     response = requests.get(API_BASE_URL)
     response.raise_for_status()
-    # meaning od .raise_for_status()
+    # meaning of .raise_for_status()
     # If the HTTP request failed (4xx or 5xx), 
     # immediately throw an exception. Otherwise, do nothing.
     return response.json()
