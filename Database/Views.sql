@@ -16,4 +16,4 @@ SELECT
     DeliveredAt
 FROM Shipments
 
-select * from shipments
+select * from vw_ShipmentDashboard
