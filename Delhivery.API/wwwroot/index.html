@@ -1,0 +1,197 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipment Intelligence Platform — Delhivery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="manifest">
+        <!-- Header -->
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand-mark">D</span>
+                <div class="brand-text">
+                    <span class="brand-name">Delhivery</span>
+                    <span class="brand-sub">Shipment Intelligence Platform</span>
+                </div>
+            </div>
+            <div class="topbar-meta">
+                <span class="dot dot-live" aria-hidden="true"></span>
+                <span>Live manifest</span>
+            </div>
+        </header>
+
+        <!-- Notification (controlled by app.js) -->
+        <div id="notification"></div>
+
+        <!-- Loading (controlled by app.js) -->
+        <div id="loading">Syncing with shipment ledger…</div>
+
+        <!-- Stats -->
+        <section class="panel stats-panel">
+            <div class="panel-head">
+                <h2>Manifest summary</h2>
+                <span class="panel-eyebrow">Live counts across the network</span>
+            </div>
+
+            <div id="statsBar">
+                <div class="statCard stat-booked">
+                    <h3>Booked</h3>
+                    <p id="bookedCount">0</p>
+                </div>
+
+                <div class="statCard stat-transit">
+                    <h3>In Transit</h3>
+                    <p id="inTransitCount">0</p>
+                </div>
+
+                <div class="statCard stat-ofd">
+                    <h3>Out for Delivery</h3>
+                    <p id="outForDeliveryCount">0</p>
+                </div>
+
+                <div class="statCard stat-delivered">
+                    <h3>Delivered</h3>
+                    <p id="deliveredCount">0</p>
+                </div>
+
+                <div class="statCard stat-rto">
+                    <h3>RTO</h3>
+                    <p id="rtoCount">0</p>
+                </div>
+
+                <div class="statCard stat-total">
+                    <h3>Total Shipments</h3>
+                    <p id="totalCount">0</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-2col">
+            <!-- Book Shipment -->
+            <section class="panel">
+                <div class="panel-head">
+                    <h2>Book a shipment</h2>
+                    <span class="panel-eyebrow">AWB is generated automatically from origin</span>
+                </div>
+
+                <form id="bookShipmentForm">
+                    <div class="field field-awb">
+                        <label for="awbNumber">Waybill number (AWB)</label>
+                        <input type="text"
+                               id="awbNumber"
+                               placeholder="Enter origin to generate"
+                               readonly />
+                    </div>
+
+                    <div class="field">
+                        <label for="senderName">Sender name</label>
+                        <input type="text"
+                               id="senderName"
+                               placeholder="e.g. Aarav Mehta" />
+                    </div>
+
+                    <div class="field">
+                        <label for="receiverName">Receiver name</label>
+                        <input type="text"
+                               id="receiverName"
+                               placeholder="e.g. Priya Nair" />
+                    </div>
+
+                    <div class="field">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" placeholder="e.g. Hyderabad" />
+                    </div>
+
+                    <div class="field">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" placeholder="e.g. Pune" />
+                    </div>
+
+                    <div class="field">
+                        <label for="weightKg">Weight (kg)</label>
+                        <input type="number"
+                               id="weightKg"
+                               placeholder="e.g. 2.5"
+                               min="0"
+                               step="0.1" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Book shipment</button>
+                </form>
+            </section>
+
+            <!-- Track Shipment -->
+            <section class="panel track-panel">
+                <div class="panel-head">
+                    <h2>Track a shipment</h2>
+                    <span class="panel-eyebrow">Look up the current status by AWB</span>
+                </div>
+
+                <div class="track-input-row">
+                    <input type="text" id="searchAwb" placeholder="Enter AWB number" />
+                    <button id="searchButton" class="btn btn-secondary">Track</button>
+                </div>
+
+                <div id="shipmentCard"></div>
+            </section>
+        </div>
+
+        <!-- Shipments Table -->
+        <section class="panel table-panel">
+            <div class="panel-head table-head">
+                <div>
+                    <h2>Shipments</h2>
+                    <span class="panel-eyebrow">Every shipment currently in the ledger</span>
+                </div>
+
+                <div class="filter-control">
+                    <label for="statusFilter">Filter</label>
+                    <select id="statusFilter">
+                        <option value="All">All statuses</option>
+                        <option value="Booked">Booked</option>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Out for Delivery">Out for Delivery</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="RTO">RTO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-scroll">
+                <table id="shipmentTable">
+                    <thead>
+                        <tr>
+                            <th>AWB</th>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Route</th>
+                            <th>Weight (Kg)</th>
+                            <th>Status</th>
+                            <th>Update status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="footnote">
+            Shipment Intelligence Platform — internal operations console
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
